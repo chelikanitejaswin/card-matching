@@ -23,7 +23,7 @@ def clear_screen():
 
 def init_board():
     """Create a shuffled ROWS x COLS board of Card objects."""
-    ids = [i // 2 for i in range(TOTAL)]   # each symbol appears twice
+    ids = [i // 2 for i in range(TOTAL)]   
     random.shuffle(ids)
 
     board = []
@@ -43,7 +43,6 @@ def print_board(board, moves, matches, flip1=None, flip2=None):
     print("  ║      MEMORY MATCHING CARD GAME       ║")
     print("  ╚══════════════════════════════════════╝\n")
 
-    # Column header
     print("       " + "".join(f"  {c + 1}  " for c in range(COLS)))
     print("      " + "──────" * COLS)
 
@@ -84,7 +83,7 @@ def get_card(board, prompt):
             continue
 
         r -= 1
-        c -= 1   # convert to 0-indexed
+        c -= 1   
 
         if board[r][c].revealed:
             print("  ✗  That card is already matched – pick another.")
@@ -99,14 +98,11 @@ def play(board):
     matches = 0
 
     while matches < PAIRS:
-        # ── Pick first card ──
         print_board(board, moves, matches)
         r1, c1 = get_card(board, "Pick 1st card")
 
-        # ── Show first card ──
         print_board(board, moves, matches, flip1=(r1, c1))
 
-        # ── Pick second card (must differ from first) ──
         while True:
             r2, c2 = get_card(board, "Pick 2nd card")
             if (r2, c2) != (r1, c1):
